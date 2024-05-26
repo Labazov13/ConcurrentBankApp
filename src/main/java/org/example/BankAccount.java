@@ -23,13 +23,13 @@ public class BankAccount implements AccountTransactions {
 
     @Override
     public boolean deposit(BankAccount account, BigDecimal amount) {
-        this.lock.lock();
+        lock.lock();
         try {
             account.setBalance(account.getBalance().add(amount));
             return true;
         }
         finally {
-            this.lock.unlock();
+            lock.unlock();
         }
     }
 

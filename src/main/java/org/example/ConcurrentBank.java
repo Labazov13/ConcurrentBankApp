@@ -44,13 +44,13 @@ public class ConcurrentBank implements TransferBetweenAccounts {
     }
 
     public BigDecimal getTotalBalance() {
-        this.lock.lock();
+        lock.lock();
         try {
             return accounts.stream()
                     .map(BankAccount::getBalance)
                     .reduce(BigDecimal.ZERO, BigDecimal::add);
         } finally {
-            this.lock.unlock();
+            lock.unlock();
         }
     }
 }
