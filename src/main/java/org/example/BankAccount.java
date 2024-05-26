@@ -7,7 +7,6 @@ import org.example.exceptions.NoMoneyException;
 import java.math.BigDecimal;
 import java.util.UUID;
 import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
 
 @Data
 public class BankAccount implements AccountTransactions {
@@ -18,7 +17,7 @@ public class BankAccount implements AccountTransactions {
     public BankAccount(BigDecimal balance) {
         id = UUID.randomUUID();
         this.balance = balance;
-        lock = new ReentrantLock();
+        lock = SharedLock.getLock();
     }
 
     @Override

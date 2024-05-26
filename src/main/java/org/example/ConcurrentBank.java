@@ -8,7 +8,6 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
 
 @Data
 public class ConcurrentBank implements TransferBetweenAccounts {
@@ -16,7 +15,7 @@ public class ConcurrentBank implements TransferBetweenAccounts {
     private List<BankAccount> accounts = new ArrayList<>();
 
     public ConcurrentBank(){
-        lock = new ReentrantLock();
+        lock = SharedLock.getLock();
     }
 
     @Override

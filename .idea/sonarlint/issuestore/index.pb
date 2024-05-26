@@ -13,3 +13,5 @@ m
 =src/main/java/org/example/Interfaces/AccountTransactions.java,d\7\d7faeb082c1a3c0b4bd3926a9d733821b9505757
 j
 :src/main/java/org/example/exceptions/NoMoneyException.java,9\7\970266b49fbe0edcd7f835f203c15c7134803229
+Y
+)src/main/java/org/example/SharedLock.java,2\1\21e6b94fae61a3a518dd012dae6c3a168f556f6d
