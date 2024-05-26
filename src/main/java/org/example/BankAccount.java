@@ -13,15 +13,16 @@ import java.util.concurrent.locks.ReentrantLock;
 public class BankAccount implements AccountTransactions {
     private UUID id;
     private BigDecimal balance;
-    private final Lock lock = new ReentrantLock();
+    private final Lock lock;
 
     public BankAccount(BigDecimal balance) {
         id = UUID.randomUUID();
         this.balance = balance;
+        lock = new ReentrantLock();
     }
 
     @Override
-    public synchronized boolean deposit(BankAccount account, BigDecimal amount) {
+    public boolean deposit(BankAccount account, BigDecimal amount) {
         this.lock.lock();
         try {
             account.setBalance(account.getBalance().add(amount));
@@ -33,7 +34,7 @@ public class BankAccount implements AccountTransactions {
     }
 
     @Override
-    public synchronized boolean withdraw(BankAccount account, BigDecimal amount) throws NoMoneyException{
+    public boolean withdraw(BankAccount account, BigDecimal amount) throws NoMoneyException{
         this.lock.lock();
         try {
             BigDecimal newBalance = account.getBalance().subtract(amount);

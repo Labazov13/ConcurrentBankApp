@@ -18,13 +18,6 @@ public class Main {
                 throw new RuntimeException(e);
             }
         });
-        Thread transferThread2 = new Thread(() -> {
-            try {
-                bank.transfer(account2, account1, new BigDecimal(100));
-            } catch (NoMoneyException e) {
-                throw new RuntimeException(e);
-            }
-        });
 
         Thread withdrawThread = new Thread(() -> {
             try {
@@ -33,6 +26,16 @@ public class Main {
                 throw new RuntimeException(e);
             }
         });
+
+        Thread transferThread2 = new Thread(() -> {
+            try {
+                bank.transfer(account2, account1, new BigDecimal(100));
+            } catch (NoMoneyException e) {
+                throw new RuntimeException(e);
+            }
+        });
+
+
 
         transferThread1.start();
         transferThread2.start();

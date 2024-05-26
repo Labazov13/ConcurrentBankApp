@@ -12,11 +12,15 @@ import java.util.concurrent.locks.ReentrantLock;
 
 @Data
 public class ConcurrentBank implements TransferBetweenAccounts {
-    private final Lock lock = new ReentrantLock();
+    private final Lock lock;
     private List<BankAccount> accounts = new ArrayList<>();
 
+    public ConcurrentBank(){
+        lock = new ReentrantLock();
+    }
+
     @Override
-    public synchronized boolean transfer(BankAccount accountFrom, BankAccount accountTo, BigDecimal amount)
+    public boolean transfer(BankAccount accountFrom, BankAccount accountTo, BigDecimal amount)
             throws NoMoneyException {
         this.lock.lock();
         try {
@@ -38,7 +42,7 @@ public class ConcurrentBank implements TransferBetweenAccounts {
         return bankAccount;
     }
 
-    public synchronized BigDecimal getTotalBalance() {
+    public BigDecimal getTotalBalance() {
         this.lock.lock();
         try {
             return accounts.stream()
