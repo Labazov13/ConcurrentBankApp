@@ -35,7 +35,7 @@ public class BankAccount implements AccountTransactions {
 
     @Override
     public boolean withdraw(BankAccount account, BigDecimal amount) throws NoMoneyException{
-        this.lock.lock();
+        lock.lock();
         try {
             BigDecimal newBalance = account.getBalance().subtract(amount);
             if (newBalance.longValue() <= 0){
@@ -45,7 +45,7 @@ public class BankAccount implements AccountTransactions {
             return true;
         }
         finally {
-            this.lock.unlock();
+            lock.unlock();
         }
     }
 }

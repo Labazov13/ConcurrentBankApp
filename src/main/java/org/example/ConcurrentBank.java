@@ -22,7 +22,7 @@ public class ConcurrentBank implements TransferBetweenAccounts {
     @Override
     public boolean transfer(BankAccount accountFrom, BankAccount accountTo, BigDecimal amount)
             throws NoMoneyException {
-        this.lock.lock();
+        lock.lock();
         try {
             BigDecimal newBalance = accountFrom.getBalance().subtract(amount);
             if (newBalance.longValue() <= 0) {
@@ -32,9 +32,10 @@ public class ConcurrentBank implements TransferBetweenAccounts {
             accountTo.setBalance(accountTo.getBalance().add(amount));
             return true;
         } finally {
-            this.lock.unlock();
+            lock.unlock();
         }
     }
+
 
     public BankAccount createAccount(BigDecimal bigDecimal) {
         BankAccount bankAccount = new BankAccount(bigDecimal);
